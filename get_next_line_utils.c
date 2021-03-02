@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 13:56:14 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/02/23 13:44:17 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:17:19 by javi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (aux);
 }
 
-char	*compro_restos(char *restos, int *comprobador)
+int	compro_restos(char *restos, char **line)
 {
 	int		i;
 	char	*aux;
+	int		controlador;
 
 	aux = NULL;
 	i = 0;
+	controlador = 3;
 	if (restos != NULL)
 	{
+		puts("bbb");
+		i = 0;
 		while (*(restos + i) != '\0')
 		{
 			if (*(restos + i) == '\n')
 			{
-				comprobador = 0;
+				controlador = 1;
 				break;
 			}
 			i++;
@@ -101,7 +105,8 @@ char	*compro_restos(char *restos, int *comprobador)
 		aux = ft_substr(restos, 0, i);
 		if (*(restos + i) == '\n')
 			restos = ft_substr(restos, i + 1, BUFFER_SIZE - i - 1);
-		return (aux);
+		*line = aux;
+	//	printf ("%s", line);
 	}
-	return (NULL);
+	return (controlador);
 }
