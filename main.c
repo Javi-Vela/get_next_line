@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 10:23:41 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/02/27 12:19:02 by javi             ###   ########.fr       */
+/*   Updated: 2021/03/04 13:47:45 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int		main()
 	while (result != 0 && result != -1)
 	{
 		result = get_next_line(fd, &line);
-		printf ("%d---%s\n", result, line);
+		printf ("%d---->%s<----\n", result, line);
 		i++;
 	}
 	
-	//system("leaks a.out");
+	system("leaks a.out");
 	printf("resultado final: %d\n", result);
 	close(fd);
 }

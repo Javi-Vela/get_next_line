@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javi <javi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 13:56:14 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/02/27 12:17:19 by javi             ###   ########.fr       */
+/*   Updated: 2021/03/04 14:04:52 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (start >= ft_strlen(s) && (len + start) >= ft_strlen(s))
 	{
-		if (!(aux = (char *)malloc(sizeof(char)+ 1)))
+		if (!(aux = (char *)malloc(sizeof(char) + 1)))
 			return (NULL);
 		aux[cont] = '\0';
 		return (aux);
@@ -80,33 +80,62 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (aux);
 }
 
-int	compro_restos(char *restos, char **line)
+char	*compro_restos(char **restos, int *controlador)
 {
 	int		i;
 	char	*aux;
-	int		controlador;
 
-	aux = NULL;
 	i = 0;
-	controlador = 3;
-	if (restos != NULL)
+	aux = NULL;
+	if (*restos != NULL)
 	{
-		puts("bbb");
 		i = 0;
-		while (*(restos + i) != '\0')
+		while (*(*restos + i) != '\0')
 		{
-			if (*(restos + i) == '\n')
+			if (*(*restos + i) == '\n')
 			{
-				controlador = 1;
-				break;
+				*controlador = 1;
+				break ;
 			}
 			i++;
 		}
-		aux = ft_substr(restos, 0, i);
-		if (*(restos + i) == '\n')
-			restos = ft_substr(restos, i + 1, BUFFER_SIZE - i - 1);
-		*line = aux;
-	//	printf ("%s", line);
+		aux = ft_substr(*restos, 0, i);
+		if (*(*restos + i) == '\n')
+			*restos = ft_substr(*restos, i + 1, BUFFER_SIZE - i - 1);
 	}
-	return (controlador);
+	return (aux);
+}
+
+char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
+{
+	int		i;
+	char	*temp;
+	char	*aux2;
+	char	*aux3;
+
+	i = 0;
+	aux3 = NULL;
+	while (*(buf + i) != '\0')
+	{
+		if (*(buf + i) == '\n')
+		{
+			*comprobador = 1;
+			break ;
+		}
+		i++;
+	}
+	if (*(buf + i) == '\n')
+		aux3 = ft_substr(buf, i + 1, BUFFER_SIZE - i - 1);
+	if (aux == NULL)
+		aux2 = ft_substr(buf, 0, i);
+	else
+	{
+		temp = ft_substr(buf, 0, i);
+		aux2 = ft_strjoin(aux, temp);
+		free (aux);
+		free (temp);
+	}
+	*restos = aux3;
+	free (aux3);
+	return (aux2);
 }
