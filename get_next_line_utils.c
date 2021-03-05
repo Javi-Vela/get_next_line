@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 13:56:14 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/04 14:04:52 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/05 12:23:39 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*compro_restos(char **restos, int *controlador)
 {
 	int		i;
 	char	*aux;
+	char	*aux2;
 
 	i = 0;
 	aux = NULL;
@@ -101,7 +102,12 @@ char	*compro_restos(char **restos, int *controlador)
 		}
 		aux = ft_substr(*restos, 0, i);
 		if (*(*restos + i) == '\n')
+		{
+			aux2 = *restos;
 			*restos = ft_substr(*restos, i + 1, BUFFER_SIZE - i - 1);
+			free (aux2);		
+		}
+		
 	}
 	return (aux);
 }
@@ -125,7 +131,11 @@ char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
 		i++;
 	}
 	if (*(buf + i) == '\n')
-		aux3 = ft_substr(buf, i + 1, BUFFER_SIZE - i - 1);
+	{
+		aux3 = *restos;
+		*restos = ft_substr(buf, i + 1, BUFFER_SIZE - i - 1);
+		free (aux3);
+	}	
 	if (aux == NULL)
 		aux2 = ft_substr(buf, 0, i);
 	else
@@ -135,7 +145,5 @@ char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
 		free (aux);
 		free (temp);
 	}
-	*restos = aux3;
-	free (aux3);
 	return (aux2);
 }
