@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:05:24 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/05 12:12:39 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:27:11 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	get_next_line(int fd, char **line)
 	int			n_bytes;
 	int			comprobador;
 
-	aux = *line;
+	*line = NULL;
+	//aux = *line;
 	n_bytes = 1;
 	if (fd == -1)
 		return (-1);
@@ -32,9 +33,10 @@ int	get_next_line(int fd, char **line)
 			comprobador = 0;
 		buf[n_bytes] = '\0';
 		aux = compro_buf(buf, &restos, aux, &comprobador);
-		
 	}
 	*line = ft_substr(aux, 0, ft_strlen(aux));
 	free (aux);
+	if (comprobador == 0)
+		restos = NULL;
 	return (comprobador);
 }

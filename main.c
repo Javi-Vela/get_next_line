@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 10:23:41 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/05 10:53:02 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:21:42 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		main()
 	{
 		result = get_next_line(fd, &line);
 		printf ("%d---->%s<----\n", result, line);
+		free (line);
 		i++;
 	}
 	

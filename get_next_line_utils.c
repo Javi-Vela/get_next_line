@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 13:56:14 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/05 12:23:39 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:22:47 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
 	char	*aux3;
 
 	i = 0;
-	aux3 = NULL;
+	aux3 = *restos;
 	while (*(buf + i) != '\0')
 	{
 		if (*(buf + i) == '\n')
@@ -132,7 +132,6 @@ char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
 	}
 	if (*(buf + i) == '\n')
 	{
-		aux3 = *restos;
 		*restos = ft_substr(buf, i + 1, BUFFER_SIZE - i - 1);
 		free (aux3);
 	}	
@@ -142,8 +141,8 @@ char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
 	{
 		temp = ft_substr(buf, 0, i);
 		aux2 = ft_strjoin(aux, temp);
-		free (aux);
 		free (temp);
+		free (aux);
 	}
 	return (aux2);
 }
