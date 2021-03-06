@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 10:23:41 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/06 17:02:20 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/06 20:28:24 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main()
 	while (result != 0 && result != -1)
 	{
 		result = get_next_line(fd, &line);
-		printf ("%d---->%s<----\n", i, line);
+		printf ("%d---->%c<----\n", i, line[fd]);
 		free (line);
 		i++;
 	}
