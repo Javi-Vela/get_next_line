@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 13:56:14 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/05 13:22:47 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:25:09 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,69 +80,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (aux);
 }
 
-char	*compro_restos(char **restos, int *controlador)
+int		look_slash_n(char *cad, int *controlador)
 {
-	int		i;
-	char	*aux;
-	char	*aux2;
+	int i;
 
 	i = 0;
-	aux = NULL;
-	if (*restos != NULL)
+	while (*(cad + i) != '\0')
 	{
-		i = 0;
-		while (*(*restos + i) != '\0')
+		if (*(cad + i) == '\n')
 		{
-			if (*(*restos + i) == '\n')
-			{
-				*controlador = 1;
-				break ;
-			}
-			i++;
-		}
-		aux = ft_substr(*restos, 0, i);
-		if (*(*restos + i) == '\n')
-		{
-			aux2 = *restos;
-			*restos = ft_substr(*restos, i + 1, BUFFER_SIZE - i - 1);
-			free (aux2);		
-		}
-		
-	}
-	return (aux);
-}
-
-char	*compro_buf(char *buf, char **restos, char *aux, int *comprobador)
-{
-	int		i;
-	char	*temp;
-	char	*aux2;
-	char	*aux3;
-
-	i = 0;
-	aux3 = *restos;
-	while (*(buf + i) != '\0')
-	{
-		if (*(buf + i) == '\n')
-		{
-			*comprobador = 1;
+			*controlador = 1;
 			break ;
 		}
 		i++;
 	}
-	if (*(buf + i) == '\n')
-	{
-		*restos = ft_substr(buf, i + 1, BUFFER_SIZE - i - 1);
-		free (aux3);
-	}	
-	if (aux == NULL)
-		aux2 = ft_substr(buf, 0, i);
-	else
-	{
-		temp = ft_substr(buf, 0, i);
-		aux2 = ft_strjoin(aux, temp);
-		free (temp);
-		free (aux);
-	}
-	return (aux2);
+	return (i);
 }
