@@ -6,11 +6,11 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:05:24 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/06 20:26:53 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/08 13:12:45 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	liberar(char *aux, int comprobador, char **restos)
 {
@@ -86,16 +86,16 @@ int		get_next_line(int fd, char **line)
 	if (fd == -1 || fd > FOPEN_MAX)
 		return (-1);
 	comprobador = 3;
-	aux = compro_restos(&restos, &comprobador);
+	aux = compro_restos((&restos + fd), &comprobador);
 	while (comprobador != 0 && comprobador != 1)
 	{
 		n_bytes = read(fd, buf, BUFFER_SIZE);
 		if (n_bytes <= 0)
 			comprobador = 0;
 		buf[n_bytes] = '\0';
-		aux = compro_buf(buf, &restos, aux, &comprobador);
+		aux = compro_buf(buf, (&restos + fd), aux, &comprobador);
 	}
-	*(line + fd) = ft_substr(aux, 0, ft_strlen(aux));
-	liberar(aux, comprobador, &restos);
+	*line = ft_substr(aux, 0, ft_strlen(aux));
+	liberar(aux, comprobador, (&restos + fd));
 	return (comprobador);
 }

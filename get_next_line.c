@@ -6,7 +6,7 @@
 /*   By: jvela-ca <jvela-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:05:24 by jvela-ca          #+#    #+#             */
-/*   Updated: 2021/03/06 20:21:26 by jvela-ca         ###   ########.fr       */
+/*   Updated: 2021/03/08 11:39:23 by jvela-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		get_next_line(int fd, char **line)
 		buf[n_bytes] = '\0';
 		aux = compro_buf(buf, &restos, aux, &comprobador);
 	}
-	*(line + fd) = ft_substr(aux, 0, ft_strlen(aux));
+	*line = ft_substr(aux, 0, ft_strlen(aux));
 	liberar(aux, comprobador, &restos);
 	return (comprobador);
 }
